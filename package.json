@@ -1,0 +1,14 @@
+{
+  "name": "planes-api",
+  "version": "1.0.0",
+  "description": "OpenAPI documentation for Planes API",
+  "main": "index.js",
+  "scripts": {
+    "build": "node scripts/build.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@redocly/cli": "^1.0.0"
+  }
+}
