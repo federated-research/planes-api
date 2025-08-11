@@ -9,7 +9,110 @@ servers:
   - url: http://localhost:3000/v1
     description: Development server
 paths:
+  /projects:
+    get:
+      summary: List projects
+      description: Retrieve a list of projects
+      operationId: listProjects
+      tags:
+        - projects
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Project'
+        '400':
+          description: Bad request - invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    Project:
+      type: object
+      required:
+        - id
+        - name
+        - status
+        - createdAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the project
+        name:
+          type: string
+          description: Name of the project
+          maxLength: 255
+        description:
+          type: string
+          description: Description of the project
+          maxLength: 1000
+        status:
+          type: string
+          enum: [active, inactive, archived]
+          description: Current status of the project
+        createdAt:
+          type: string
+          format: date-time
+          description: When the project was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: When the project was last updated
+        ownerId:
+          type: string
+          format: uuid
+          description: ID of the project owner
+        tags:
+          type: array
+          items:
+            type: string
+          description: Tags associated with the project
+        metadata:
+          type: object
+          additionalProperties: true
+          description: Additional metadata for the project
+
+
+
+    ErrorResponse:
+      type: object
+      required:
+        - error
+        - message
+      properties:
+        error:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error message
+        details:
+          type: object
+          additionalProperties: true
+          description: Additional error details
 
 tags:
   - name: analysis
     description: Operations related to analysis
+  - name: projects
+    description: Operations related to project management
