@@ -1,11 +1,18 @@
-const fs = require('fs');
-const path = require('path');
-const { execSync } = require('child_process');
+import fs from 'fs';
+import path from 'path';
+import { execSync } from 'child_process';
 
 // Configuration
 const APIS_DIR = 'apis';
 const DOCS_DIR = 'docs';
 const SRC_DIR = 'src';
+
+// Types
+interface ApiFile {
+    filePath: string;
+    urlPath: string;
+    dirPath: string;
+}
 
 // Ensure docs directory exists
 if (!fs.existsSync(DOCS_DIR)) {
@@ -19,8 +26,8 @@ const landingPageDest = path.join(DOCS_DIR, 'index.html');
 fs.copyFileSync(landingPage, landingPageDest);
 
 // Recursively find all api.yaml files
-function findApiFiles(dir, basePath = '') {
-    const results = [];
+function findApiFiles(dir: string, basePath: string = ''): ApiFile[] {
+    const results: ApiFile[] = [];
     
     try {
         const items = fs.readdirSync(dir, { withFileTypes: true });
@@ -29,10 +36,10 @@ function findApiFiles(dir, basePath = '') {
             const fullPath = path.join(dir, item.name);
             const relativePath = path.join(basePath, item.name);
             
-                    if (item.isDirectory()) {
-            // Recursively search subdirectories
-            results.push(...findApiFiles(fullPath, relativePath));
-        } else if (item.name === 'api.yaml') {
+            if (item.isDirectory()) {
+                // Recursively search subdirectories
+                results.push(...findApiFiles(fullPath, relativePath));
+            } else if (item.name === 'api.yaml') {
                 // Found an API file
                 results.push({
                     filePath: fullPath,
@@ -42,7 +49,7 @@ function findApiFiles(dir, basePath = '') {
             }
         }
     } catch (error) {
-        console.warn(`⚠️  Could not read directory ${dir}:`, error.message);
+        console.warn(`⚠️  Could not read directory ${dir}:`, error instanceof Error ? error.message : String(error));
     }
     
     return results;
@@ -76,7 +83,7 @@ apiFiles.forEach(({ filePath, urlPath, dirPath }) => {
         execSync(command, { stdio: 'inherit' });
         console.log(`✅ Successfully built documentation for ${urlPath || 'root'}`);
     } catch (error) {
-        console.error(`❌ Failed to build documentation for ${urlPath || 'root'}:`, error.message);
+        console.error(`❌ Failed to build documentation for ${urlPath || 'root'}:`, error instanceof Error ? error.message : String(error));
     }
 });
 

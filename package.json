@@ -4,11 +4,15 @@
   "description": "OpenAPI documentation for Planes API",
   "main": "index.js",
   "scripts": {
-    "build": "node scripts/build.js"
+    "build": "tsx scripts/build.ts",
+    "type-check": "tsc --noEmit"
   },
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@redocly/cli": "^1.0.0"
+    "@redocly/cli": "^1.0.0",
+    "@types/node": "^20.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.0.0"
   }
 }
