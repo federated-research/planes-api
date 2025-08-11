@@ -4,9 +4,9 @@ info:
   description: Data Plane API
   version: 0.0.1a
 servers:
-  - url: https://api.example.com/v1
+  - url: https://api.example.com/data/v0.0.1
     description: Production server
-  - url: http://localhost:3000/v1
+  - url: http://localhost:3000/data/v0.0.1
     description: Development server
 paths:
 

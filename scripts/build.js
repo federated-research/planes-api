@@ -18,38 +18,65 @@ const landingPage = path.join(SRC_DIR, 'index.html');
 const landingPageDest = path.join(DOCS_DIR, 'index.html');
 fs.copyFileSync(landingPage, landingPageDest);
 
-// Get all API directories
-const apiDirs = fs.readdirSync(APIS_DIR, { withFileTypes: true })
-    .filter(dirent => dirent.isDirectory())
-    .map(dirent => dirent.name);
-
-console.log(`🔍 Found ${apiDirs.length} API(s): ${apiDirs.join(', ')}`);
-
-// Build documentation for each API
-apiDirs.forEach(apiName => {
-    const apiDir = path.join(APIS_DIR, apiName);
-    const openapiFile = path.join(apiDir, 'openapi.yaml');
-    const docsOutputDir = path.join(DOCS_DIR, apiName);
+// Recursively find all api.yaml files
+function findApiFiles(dir, basePath = '') {
+    const results = [];
     
-    if (!fs.existsSync(openapiFile)) {
-        console.warn(`⚠️  No openapi.yaml found in ${apiDir}, skipping...`);
-        return;
+    try {
+        const items = fs.readdirSync(dir, { withFileTypes: true });
+        
+        for (const item of items) {
+            const fullPath = path.join(dir, item.name);
+            const relativePath = path.join(basePath, item.name);
+            
+                    if (item.isDirectory()) {
+            // Recursively search subdirectories
+            results.push(...findApiFiles(fullPath, relativePath));
+        } else if (item.name === 'api.yaml') {
+                // Found an API file
+                results.push({
+                    filePath: fullPath,
+                    urlPath: basePath.replace(/\\/g, '/'), // Normalize path separators
+                    dirPath: path.dirname(fullPath)
+                });
+            }
+        }
+    } catch (error) {
+        console.warn(`⚠️  Could not read directory ${dir}:`, error.message);
     }
+    
+    return results;
+}
+
+// Find all API files
+const apiFiles = findApiFiles(APIS_DIR);
+
+console.log(`🔍 Found ${apiFiles.length} API file(s):`);
+
+// Build documentation for each API file
+apiFiles.forEach(({ filePath, urlPath, dirPath }) => {
+    const docsOutputDir = path.join(DOCS_DIR, urlPath);
     
     // Create output directory
     if (!fs.existsSync(docsOutputDir)) {
         fs.mkdirSync(docsOutputDir, { recursive: true });
     }
     
-    console.log(`📚 Building documentation for ${apiName}...`);
+    // Generate a title from the path
+    const pathParts = urlPath.split('/').filter(part => part.length > 0);
+    const title = pathParts.length > 0 
+        ? pathParts.map(part => part.charAt(0).toUpperCase() + part.slice(1)).join(' ') + ' API Documentation'
+        : 'API Documentation';
+    
+    console.log(`📚 Building documentation for ${urlPath || 'root'}...`);
     
     try {
         // Build the documentation using @redocly/cli
-        const command = `npx @redocly/cli build-docs "${openapiFile}" -o "${docsOutputDir}/index.html" --title "${apiName.charAt(0).toUpperCase() + apiName.slice(1)} API Documentation"`;
+        const command = `npx @redocly/cli build-docs "${filePath}" -o "${docsOutputDir}/index.html" --title "${title}"`;
         execSync(command, { stdio: 'inherit' });
-        console.log(`✅ Successfully built ${apiName} documentation`);
+        console.log(`✅ Successfully built documentation for ${urlPath || 'root'}`);
     } catch (error) {
-        console.error(`❌ Failed to build ${apiName} documentation:`, error.message);
+        console.error(`❌ Failed to build documentation for ${urlPath || 'root'}:`, error.message);
     }
 });
 
