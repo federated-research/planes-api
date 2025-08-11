@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
-  title: Analysis Plane API
-  description: Analysis Plane API
+  title: Control Plane API
+  description: Control Plane API
   version: 0.0.1a
 servers:
   - url: https://api.example.com/control/v0.0.1
