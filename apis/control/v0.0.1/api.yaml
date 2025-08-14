@@ -793,6 +793,1178 @@ paths:
             text/json:
               schema:
                 $ref: '#/components/schemas/KeycloakCredentials'
+  /api/Project/SaveProject:
+    post:
+      tags:
+        - Project
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/FormData'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FormData'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/FormData'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/FormData'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Project'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+  /api/Project/CheckUserExists:
+    post:
+      tags:
+        - Project
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/ProjectUser'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectUser'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ProjectUser'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ProjectUser'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProjectUser'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectUser'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProjectUser'
+  /api/Project/AddUserMembership:
+    post:
+      tags:
+        - Project
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/ProjectUser'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectUser'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ProjectUser'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ProjectUser'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProjectUser'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectUser'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProjectUser'
+  /api/Project/RemoveUserMembership:
+    post:
+      tags:
+        - Project
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/ProjectUser'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectUser'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ProjectUser'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ProjectUser'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProjectUser'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectUser'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProjectUser'
+  /api/Project/AddTreMembership:
+    post:
+      tags:
+        - Project
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/ProjectTre'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectTre'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ProjectTre'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ProjectTre'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProjectTre'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectTre'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProjectTre'
+  /api/Project/RemoveTreMembership:
+    post:
+      tags:
+        - Project
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/ProjectTre'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectTre'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ProjectTre'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ProjectTre'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProjectTre'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectTre'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProjectTre'
+  /api/Project/GetProjectUI:
+    get:
+      tags:
+        - Project
+      parameters:
+        - name: projectId
+          in: query
+          style: form
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/SubmissionGetProjectModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubmissionGetProjectModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/SubmissionGetProjectModel'
+  /api/Project/GetProject:
+    get:
+      tags:
+        - Project
+      parameters:
+        - name: projectId
+          in: query
+          style: form
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Project'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+  /api/Project/GetAllProjects:
+    get:
+      tags:
+        - Project
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Project'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Project'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Project'
+  /api/Project/GetAllProjectsForTre:
+    get:
+      tags:
+        - Project
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Project'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Project'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Project'
+  /api/Project/SyncTreProjectDecisions:
+    post:
+      tags:
+        - Project
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/ProjectTreDecisionsDTO'
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/ProjectTreDecisionsDTO'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/ProjectTreDecisionsDTO'
+          application/*+json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/ProjectTreDecisionsDTO'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/BoolReturn'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BoolReturn'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/BoolReturn'
+  /api/Project/SyncTreMembershipDecisions:
+    post:
+      tags:
+        - Project
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MembershipTreDecisionDTO'
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MembershipTreDecisionDTO'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MembershipTreDecisionDTO'
+          application/*+json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MembershipTreDecisionDTO'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/BoolReturn'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BoolReturn'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/BoolReturn'
+  /api/Project/GetTresInProject:
+    get:
+      tags:
+        - Project
+      parameters:
+        - name: projectId
+          in: query
+          style: form
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Tre'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Tre'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Tre'
+  /api/Project/TestFetchAndStoreObject:
+    post:
+      tags:
+        - Project
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/testFetch'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/testFetch'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/testFetch'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/testFetch'
+      responses:
+        '200':
+          description: Success
+  /api/Project/IsUserOnProject:
+    get:
+      tags:
+        - Project
+      parameters:
+        - name: projectId
+          in: query
+          style: form
+          schema:
+            type: integer
+            format: int32
+        - name: userId
+          in: query
+          style: form
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: boolean
+            application/json:
+              schema:
+                type: boolean
+            text/json:
+              schema:
+                type: boolean
+  /api/Project/GetMinioEndPoint:
+    get:
+      tags:
+        - Project
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/MinioEndpoint'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MinioEndpoint'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MinioEndpoint'
+  /api/Project/UploadToMinio:
+    post:
+      tags:
+        - Project
+      parameters:
+        - name: bucketName
+          in: query
+          style: form
+          schema:
+            type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+            encoding:
+              file:
+                style: form
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/BoolReturn'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BoolReturn'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/BoolReturn'
+  /api/Project/GetSearchData:
+    get:
+      tags:
+        - Project
+      parameters:
+        - name: searchString
+          in: query
+          style: form
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Project'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Project'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Project'
+  /api/SignalR/Index:
+    post:
+      tags:
+        - SignalR
+      responses:
+        '200':
+          description: Success
+  /api/SignalR/StartConnection:
+    get:
+      tags:
+        - SignalR
+      responses:
+        '200':
+          description: Success
+  /api/Submission/GetRequestCancelSubsForTre:
+    get:
+      tags:
+        - Submission
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Submission'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Submission'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Submission'
+  /api/Submission/CloseSubmissionForTre:
+    get:
+      tags:
+        - Submission
+      parameters:
+        - name: subId
+          in: query
+          style: form
+          schema:
+            type: string
+        - name: statusType
+          in: query
+          style: form
+          schema:
+            $ref: '#/components/schemas/StatusType'
+        - name: finalFile
+          in: query
+          style: form
+          schema:
+            type: string
+        - name: description
+          in: query
+          style: form
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/APIReturn'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIReturn'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/APIReturn'
+  /api/Submission/GetAllSubmissions:
+    get:
+      tags:
+        - Submission
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Submission'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Submission'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Submission'
+  /api/Submission/TestSubRabbitSendRemoveBeforeDeploy:
+    get:
+      tags:
+        - Submission
+      parameters:
+        - name: id
+          in: query
+          style: form
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+  /api/Submission/GetASubmission/{submissionId}:
+    get:
+      tags:
+        - Submission
+      parameters:
+        - name: submissionId
+          in: path
+          required: true
+          style: simple
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Submission'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Submission'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Submission'
+  /api/Submission/StageTypes:
+    get:
+      tags:
+        - Submission
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Stages'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Stages'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Stages'
+  /api/Submission/DownloadFile:
+    get:
+      tags:
+        - Submission
+      parameters:
+        - name: submissionId
+          in: query
+          style: form
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+  /api/Submission/SaveSubmissionFiles:
+    post:
+      tags:
+        - Submission
+      parameters:
+        - name: submissionId
+          in: query
+          style: form
+          schema:
+            type: integer
+            format: int32
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/SubmissionFile'
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/SubmissionFile'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/SubmissionFile'
+          application/*+json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/SubmissionFile'
+      responses:
+        '200':
+          description: Success
+  /v1/tasks/{id}:cancel:
+    post:
+      tags:
+        - TaskServiceApi
+      parameters:
+        - name: id
+          in: path
+          required: true
+          style: simple
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema: {}
+            application/json:
+              schema: {}
+            text/json:
+              schema: {}
+  /v1/tasks:
+    post:
+      tags:
+        - TaskServiceApi
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/TesTask'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TesTask'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/TesTask'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/TesTask'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/TesCreateTaskResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TesCreateTaskResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/TesCreateTaskResponse'
+    get:
+      tags:
+        - TaskServiceApi
+      parameters:
+        - name: namePrefix
+          in: query
+          style: form
+          schema:
+            type: string
+        - name: pageSize
+          in: query
+          style: form
+          schema:
+            type: integer
+            format: int64
+        - name: pageToken
+          in: query
+          style: form
+          schema:
+            type: string
+        - name: view
+          in: query
+          style: form
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/TesListTasksResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TesListTasksResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/TesListTasksResponse'
+  /v1/service-info:
+    get:
+      tags:
+        - TaskServiceApi
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/TesServiceInfo'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TesServiceInfo'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/TesServiceInfo'
+  /v1/get_test_tes:
+    get:
+      tags:
+        - TaskServiceApi
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+  /v1/tasks/{id}:
+    get:
+      tags:
+        - TaskServiceApi
+      parameters:
+        - name: id
+          in: path
+          required: true
+          style: simple
+          schema:
+            type: string
+        - name: view
+          in: query
+          style: form
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/TesTask'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TesTask'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/TesTask'
+  /api/Tre/SaveTre:
+    post:
+      tags:
+        - Tre
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/FormData'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FormData'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/FormData'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/FormData'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Tre'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tre'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Tre'
+  /api/Tre/GetTresInProject/{projectId}:
+    get:
+      tags:
+        - Tre
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          style: simple
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Tre'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Tre'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Tre'
+  /api/Tre/GetAllTresUI:
+    get:
+      tags:
+        - Tre
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TreGetProjectModel'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TreGetProjectModel'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TreGetProjectModel'
+  /api/Tre/GetAllTres:
+    get:
+      tags:
+        - Tre
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Tre'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Tre'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Tre'
+  /api/Tre/GetATre:
+    get:
+      tags:
+        - Tre
+      parameters:
+        - name: treId
+          in: query
+          style: form
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Tre'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tre'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Tre'
+  /api/User/SaveUser:
+    post:
+      tags:
+        - User
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/FormData'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FormData'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/FormData'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/FormData'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/User'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/User'
+  /api/User/GetUser:
+    get:
+      tags:
+        - User
+      parameters:
+        - name: userId
+          in: query
+          style: form
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/User'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/User'
+  /api/User/GetAllUsersUI:
+    get:
+      tags:
+        - User
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserGetProjectModel'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserGetProjectModel'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserGetProjectModel'
+  /api/User/GetAllUsers:
+    get:
+      tags:
+        - User
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+  /api/User/AddProjectMembership:
+    post:
+      tags:
+        - User
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/ProjectUser'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectUser'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ProjectUser'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ProjectUser'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProjectUser'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectUser'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProjectUser'
+  /api/User/RemoveProjectMembership:
+    post:
+      tags:
+        - User
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/ProjectUser'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectUser'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ProjectUser'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ProjectUser'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProjectUser'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectUser'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProjectUser'
 components:
   schemas:
     APIReturn:
@@ -1548,6 +2720,522 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AuditLog'
+          nullable: true
+      additionalProperties: false
+    FormData:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        formIoUrl:
+          type: string
+          nullable: true
+        formIoString:
+          type: string
+          nullable: true
+        createdDate:
+          type: string
+          format: date-time
+      additionalProperties: false
+    ProjectUser:
+      type: object
+      properties:
+        userId:
+          type: integer
+          format: int32
+        projectId:
+          type: integer
+          format: int32
+        projectItemList:
+          type: array
+          items:
+            $ref: '#/components/schemas/SelectListItem'
+          nullable: true
+        userItemList:
+          type: array
+          items:
+            $ref: '#/components/schemas/SelectListItem'
+          nullable: true
+      additionalProperties: false
+    ProjectTre:
+      type: object
+      properties:
+        projectId:
+          type: integer
+          format: int32
+        treId:
+          type: integer
+          format: int32
+        projectItemList:
+          type: array
+          items:
+            $ref: '#/components/schemas/SelectListItem'
+          nullable: true
+        treItemList:
+          type: array
+          items:
+            $ref: '#/components/schemas/SelectListItem'
+          nullable: true
+      additionalProperties: false
+    ProjectTreDecisionsDTO:
+      type: object
+      properties:
+        projectId:
+          type: integer
+          format: int32
+        decision:
+          $ref: '#/components/schemas/Decision'
+      additionalProperties: false
+    MembershipTreDecisionDTO:
+      type: object
+      properties:
+        projectId:
+          type: integer
+          format: int32
+        userId:
+          type: integer
+          format: int32
+        decision:
+          $ref: '#/components/schemas/Decision'
+      additionalProperties: false
+    MinioEndpoint:
+      type: object
+      properties:
+        url:
+          type: string
+          nullable: true
+      additionalProperties: false
+    SelectListGroup:
+      type: object
+      properties:
+        disabled:
+          type: boolean
+        name:
+          type: string
+          nullable: true
+      additionalProperties: false
+    SelectListItem:
+      type: object
+      properties:
+        disabled:
+          type: boolean
+        group:
+          $ref: '#/components/schemas/SelectListGroup'
+        selected:
+          type: boolean
+        text:
+          type: string
+          nullable: true
+        value:
+          type: string
+          nullable: true
+      additionalProperties: false
+    SubmissionGetProjectModel:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        formData:
+          type: string
+          nullable: true
+        name:
+          type: string
+          nullable: true
+        endDate:
+          type: string
+          format: date-time
+        startDate:
+          type: string
+          format: date-time
+        projectDescription:
+          type: string
+          nullable: true
+        projectOwner:
+          type: string
+          nullable: true
+        projectContact:
+          type: string
+          nullable: true
+        submissionBucket:
+          type: string
+          nullable: true
+        outputBucket:
+          type: string
+          nullable: true
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserGetProjectModel'
+          nullable: true
+        tres:
+          type: array
+          items:
+            $ref: '#/components/schemas/TreGetProjectModel'
+          nullable: true
+        submissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubmissionsGetProjectModel'
+          nullable: true
+      additionalProperties: false
+    SubmissionsGetProjectModel:
+      type: object
+      properties:
+        hasParent:
+          type: boolean
+        id:
+          type: integer
+          format: int32
+        parentId:
+          type: integer
+          format: int32
+          nullable: true
+        status:
+          $ref: '#/components/schemas/StatusType'
+        endTime:
+          type: string
+          format: date-time
+        startTime:
+          type: string
+          format: date-time
+        tesName:
+          type: string
+          nullable: true
+        projectName:
+          type: string
+          nullable: true
+        submittedByName:
+          type: string
+          nullable: true
+      additionalProperties: false
+    TreGetProjectModel:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+          nullable: true
+      additionalProperties: false
+    UserGetProjectModel:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+          nullable: true
+        fullName:
+          type: string
+          nullable: true
+      additionalProperties: false
+    testFetch:
+      type: object
+      properties:
+        url:
+          type: string
+          nullable: true
+        bucketName:
+          type: string
+          nullable: true
+        key:
+          type: string
+          nullable: true
+      additionalProperties: false
+    TesCreateTaskResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+      additionalProperties: false
+    TesExecutor:
+      type: object
+      properties:
+        image:
+          type: string
+          nullable: true
+        command:
+          type: array
+          items:
+            type: string
+          nullable: true
+        workdir:
+          type: string
+          nullable: true
+        stdin:
+          type: string
+          nullable: true
+        stdout:
+          type: string
+          nullable: true
+        stderr:
+          type: string
+          nullable: true
+        env:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+      additionalProperties: false
+    TesExecutorLog:
+      type: object
+      properties:
+        startTime:
+          type: string
+          format: date-time
+          nullable: true
+        endTime:
+          type: string
+          format: date-time
+          nullable: true
+        stdout:
+          type: string
+          nullable: true
+        stderr:
+          type: string
+          nullable: true
+        exitCode:
+          type: integer
+          format: int32
+          nullable: true
+      additionalProperties: false
+    TesFileType:
+      enum:
+        - 1
+        - 2
+      type: integer
+      format: int32
+    TesInput:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        url:
+          type: string
+          nullable: true
+        path:
+          type: string
+          nullable: true
+        type:
+          $ref: '#/components/schemas/TesFileType'
+        content:
+          type: string
+          nullable: true
+        streamable:
+          type: boolean
+      additionalProperties: false
+    TesListTasksResponse:
+      type: object
+      properties:
+        tasks:
+          type: array
+          items:
+            $ref: '#/components/schemas/TesTask'
+          nullable: true
+        nextPageToken:
+          type: string
+          nullable: true
+      additionalProperties: false
+    TesOutput:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        url:
+          type: string
+          nullable: true
+        path:
+          type: string
+          nullable: true
+        type:
+          $ref: '#/components/schemas/TesFileType'
+      additionalProperties: false
+    TesOutputFileLog:
+      type: object
+      properties:
+        url:
+          type: string
+          nullable: true
+        path:
+          type: string
+          nullable: true
+        sizeBytes:
+          type: string
+          nullable: true
+      additionalProperties: false
+    TesResources:
+      type: object
+      properties:
+        cpuCores:
+          type: integer
+          format: int64
+          nullable: true
+        preemptible:
+          type: boolean
+          nullable: true
+        ramGb:
+          type: number
+          format: double
+          nullable: true
+        diskGb:
+          type: number
+          format: double
+          nullable: true
+        zones:
+          type: array
+          items:
+            type: string
+          nullable: true
+        backendParameters:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+        backendParametersStrict:
+          type: boolean
+          nullable: true
+      additionalProperties: false
+    TesServiceInfo:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+        doc:
+          type: string
+          nullable: true
+        storage:
+          type: array
+          items:
+            type: string
+          nullable: true
+        tesResourcesSupportedBackendParameters:
+          type: array
+          items:
+            type: string
+          nullable: true
+      additionalProperties: false
+    TesState:
+      enum:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+        - 9
+      type: integer
+      format: int32
+    TesTask:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        state:
+          $ref: '#/components/schemas/TesState'
+        name:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        inputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/TesInput'
+          nullable: true
+        outputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/TesOutput'
+          nullable: true
+        resources:
+          $ref: '#/components/schemas/TesResources'
+        executors:
+          type: array
+          items:
+            $ref: '#/components/schemas/TesExecutor'
+          nullable: true
+        volumes:
+          type: array
+          items:
+            type: string
+          nullable: true
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+        logs:
+          type: array
+          items:
+            $ref: '#/components/schemas/TesTaskLog'
+          nullable: true
+        creationTime:
+          type: string
+          format: date-time
+          nullable: true
+      additionalProperties: false
+    TesTaskLog:
+      type: object
+      properties:
+        logs:
+          type: array
+          items:
+            $ref: '#/components/schemas/TesExecutorLog'
+          nullable: true
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+        startTime:
+          type: string
+          format: date-time
+          nullable: true
+        endTime:
+          type: string
+          format: date-time
+          nullable: true
+        outputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/TesOutputFileLog'
+          nullable: true
+        systemLogs:
+          type: array
+          items:
+            type: string
+          nullable: true
+      additionalProperties: false
+    Stages:
+      type: object
+      properties:
+        stageInfos:
+          type: array
+          items:
+            $ref: '#/components/schemas/StageInfo'
+          nullable: true
+        redStages:
+          type: array
+          items:
+            $ref: '#/components/schemas/StatusType'
           nullable: true
       additionalProperties: false
   securitySchemes:
