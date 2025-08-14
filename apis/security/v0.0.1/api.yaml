@@ -9,6 +9,436 @@ servers:
   - url: http://localhost:3000/security/v0.0.1
     description: Development server
 paths:
+  /api/DataEgress/AddNewDataEgress:
+    post:
+      tags:
+        - DataEgress
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/EgressSubmission'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EgressSubmission'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/EgressSubmission'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/EgressSubmission'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/BoolReturn'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BoolReturn'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/BoolReturn'
+  /api/DataEgress/GetAllEgresses:
+    get:
+      tags:
+        - DataEgress
+      parameters:
+        - name: unprocessedonly
+          in: query
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EgressSubmission'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EgressSubmission'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EgressSubmission'
+  /api/DataEgress/GetEgress:
+    get:
+      tags:
+        - DataEgress
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/EgressSubmission'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EgressSubmission'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/EgressSubmission'
+  /api/DataEgress/GetEgressFile/{id}:
+    get:
+      tags:
+        - DataEgress
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/EgressFile'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EgressFile'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/EgressFile'
+  /api/DataEgress/CompleteEgress:
+    post:
+      tags:
+        - DataEgress
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/EgressSubmission'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EgressSubmission'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/EgressSubmission'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/EgressSubmission'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/EgressSubmission'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EgressSubmission'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/EgressSubmission'
+  /api/DataEgress/PartialEgress:
+    post:
+      tags:
+        - DataEgress
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/EgressSubmission'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EgressSubmission'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/EgressSubmission'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/EgressSubmission'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/EgressSubmission'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EgressSubmission'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/EgressSubmission'
+  /api/DataEgress/UpdateFileData:
+    post:
+      tags:
+        - DataEgress
+      parameters:
+        - name: fileId
+          in: query
+          schema:
+            type: integer
+            format: int32
+        - name: status
+          in: query
+          schema:
+            $ref: '#/components/schemas/FileStatus'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/EgressFile'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EgressFile'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/EgressFile'
+  /api/DataEgress/DownloadFile:
+    get:
+      tags:
+        - DataEgress
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+  /api/TreCredentials/CheckCredentialsAreValid:
+    get:
+      tags:
+        - TreCredentials
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/BoolReturn'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BoolReturn'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/BoolReturn'
+  /api/TreCredentials/EgressCheckCredentialsAreValid:
+    get:
+      tags:
+        - TreCredentials
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/BoolReturn'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BoolReturn'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/BoolReturn'
+  /api/TreCredentials/EgressUpdateCredentials:
+    post:
+      tags:
+        - TreCredentials
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/KeycloakCredentials'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KeycloakCredentials'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/KeycloakCredentials'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/KeycloakCredentials'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/KeycloakCredentials'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KeycloakCredentials'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/KeycloakCredentials'
+  /api/TreCredentials/UpdateCredentials:
+    post:
+      tags:
+        - TreCredentials
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/KeycloakCredentials'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KeycloakCredentials'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/KeycloakCredentials'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/KeycloakCredentials'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/KeycloakCredentials'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KeycloakCredentials'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/KeycloakCredentials'
+components:
+  schemas:
+    BoolReturn:
+      type: object
+      properties:
+        result:
+          type: boolean
+      additionalProperties: false
+    CredentialType:
+      enum:
+        - 0
+        - 1
+        - 2
+      type: integer
+      format: int32
+    EgressFile:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+          nullable: true
+        status:
+          $ref: '#/components/schemas/FileStatus'
+        lastUpdate:
+          type: string
+          format: date-time
+          nullable: true
+        reviewer:
+          type: string
+          nullable: true
+        egressSubmission:
+          $ref: '#/components/schemas/EgressSubmission'
+      additionalProperties: false
+    EgressStatus:
+      enum:
+        - 0
+        - 1
+        - 2
+        - 3
+      type: integer
+      format: int32
+    EgressSubmission:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        submissionId:
+          type: string
+          nullable: true
+        status:
+          $ref: '#/components/schemas/EgressStatus'
+        outputBucket:
+          type: string
+          nullable: true
+        completed:
+          type: string
+          format: date-time
+          nullable: true
+        reviewer:
+          type: string
+          nullable: true
+        files:
+          type: array
+          items:
+            $ref: '#/components/schemas/EgressFile'
+          nullable: true
+        tesId:
+          type: string
+          nullable: true
+        name:
+          type: string
+          nullable: true
+        egressStatusDisplay:
+          type: string
+          nullable: true
+          readOnly: true
+      additionalProperties: false
+    FileStatus:
+      enum:
+        - 0
+        - 1
+        - 2
+      type: integer
+      format: int32
+    KeycloakCredentials:
+      required:
+        - passwordEnc
+        - userName
+      type: object
+      properties:
+        error:
+          type: boolean
+        errorMessage:
+          type: string
+          nullable: true
+        id:
+          type: integer
+          format: int32
+        userName:
+          minLength: 1
+          type: string
+        passwordEnc:
+          minLength: 1
+          type: string
+        confirmPassword:
+          type: string
+          nullable: true
+        credentialType:
+          $ref: '#/components/schemas/CredentialType'
+        valid:
+          type: boolean
+      additionalProperties: false
+  securitySchemes:
+    Bearer:
+      type: http
+      description: Enter JWT token.
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - Bearer: []
+
+
 
 tags:
   - name: security
