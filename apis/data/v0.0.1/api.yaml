@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: Data Plane API
   description: Data Plane API
-  version: 0.0.1a
+  version: 0.0.1-alpha.0.0
 servers:
   - url: https://api.example.com/data/v0.0.1
     description: Production server

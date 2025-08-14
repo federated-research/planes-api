@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: Analysis Plane API
   description: Analysis Plane API
-  version: 0.0.1a
+  version: 0.0.1-alpha.0.0
 servers:
   - url: https://api.example.com/analysis/v0.0.1
     description: Production server
