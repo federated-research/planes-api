@@ -313,6 +313,54 @@ paths:
             text/json:
               schema:
                 $ref: '#/components/schemas/KeycloakCredentials'
+    /api/DataEgressCredentials/CheckCredentialsAreValid:
+    get:
+      tags:
+        - DataEgressCredentials
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/BoolReturn'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BoolReturn'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/BoolReturn'
+  /api/DataEgressCredentials/UpdateCredentials:
+    post:
+      tags:
+        - DataEgressCredentials
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/KeycloakCredentials'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KeycloakCredentials'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/KeycloakCredentials'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/KeycloakCredentials'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/KeycloakCredentials'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KeycloakCredentials'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/KeycloakCredentials'
 components:
   schemas:
     BoolReturn:

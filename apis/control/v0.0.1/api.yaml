@@ -1,118 +1,1560 @@
 openapi: 3.0.3
 info:
   title: Control Plane API
-  description: Control Plane API
   version: 0.0.1a
+  description: Control Plane API
 servers:
-  - url: https://api.example.com/control/v0.0.1
+  - url: https://api.example.com/tre/v1.0.0
     description: Production server
-  - url: http://localhost:3000/control/v0.0.1
+  - url: http://localhost:3000/tre/v1.0.0
     description: Development server
 paths:
-  /projects:
+  /api/Approval/GetMemberships:
     get:
-      summary: List projects
-      description: Retrieve a list of projects
-      operationId: listProjects
       tags:
-        - projects
+        - Approval
+      parameters:
+        - name: projectId
+          in: query
+          schema:
+            type: integer
+            format: int32
+        - name: showOnlyUnprocessed
+          in: query
+          schema:
+            type: boolean
       responses:
         '200':
-          description: Successful response
+          description: Success
           content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TreMembershipDecision'
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Project'
-        '400':
-          description: Bad request - invalid parameters
+                  $ref: '#/components/schemas/TreMembershipDecision'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TreMembershipDecision'
+  /api/Approval/GetAllTreProjects:
+    get:
+      tags:
+        - Approval
+      parameters:
+        - name: showOnlyUnprocessed
+          in: query
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Success
           content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TreProject'
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '401':
-          description: Unauthorized
+                type: array
+                items:
+                  $ref: '#/components/schemas/TreProject'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TreProject'
+  /api/Approval/GetTreProject:
+    get:
+      tags:
+        - Approval
+      parameters:
+        - name: projectId
+          in: query
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
           content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/TreProject'
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '500':
-          description: Internal server error
+                $ref: '#/components/schemas/TreProject'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/TreProject'
+  /api/Approval/GetAllActiveTreProjects:
+    get:
+      tags:
+        - Approval
+      responses:
+        '200':
+          description: Success
           content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TreProject'
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-
+                type: array
+                items:
+                  $ref: '#/components/schemas/TreProject'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TreProject'
+  /api/Approval/GetAllTreUsers:
+    get:
+      tags:
+        - Approval
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TreUser'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TreUser'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TreUser'
+  /api/Approval/GetAllActiveTreUsers:
+    get:
+      tags:
+        - Approval
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TreUser'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TreUser'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TreUser'
+  /api/Approval/GetAllMembershipDecisions:
+    get:
+      tags:
+        - Approval
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TreMembershipDecision'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TreMembershipDecision'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TreMembershipDecision'
+  /api/Approval/GetAllActiveMembershipDecisions:
+    get:
+      tags:
+        - Approval
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TreMembershipDecision'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TreMembershipDecision'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TreMembershipDecision'
+  /api/Approval/GetAllUndecidedMembershipDecisions:
+    get:
+      tags:
+        - Approval
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TreMembershipDecision'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TreMembershipDecision'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TreMembershipDecision'
+  /api/Approval/UpdateProjects:
+    post:
+      tags:
+        - Approval
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/TreProject'
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/TreProject'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/TreProject'
+          application/*+json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/TreProject'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TreProject'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TreProject'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TreProject'
+  /api/Approval/UpdateMembershipDecisions:
+    post:
+      tags:
+        - Approval
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/TreMembershipDecision'
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/TreMembershipDecision'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/TreMembershipDecision'
+          application/*+json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/TreMembershipDecision'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TreMembershipDecision'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TreMembershipDecision'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TreMembershipDecision'
+  /api/Approval/SyncSubmissionWithTre:
+    get:
+      tags:
+        - Approval
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/BoolReturn'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BoolReturn'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/BoolReturn'
+  /api/DEBUGHasura/RunHasuraSetup:
+    post:
+      tags:
+        - DEBUGHasura
+      responses:
+        '200':
+          description: Success
+  /api/DEBUGHasura/DoSyncWork:
+    post:
+      tags:
+        - DEBUGHasura
+      responses:
+        '200':
+          description: Success
+  /api/DEBUGHasura/DoAgentWork:
+    post:
+      tags:
+        - DEBUGHasura
+      responses:
+        '200':
+          description: Success
+  /api/HasuraAuthentication:
+    get:
+      tags:
+        - HasuraAuthentication
+      parameters:
+        - name: Token
+          in: header
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+  /api/OPA/TokenPlease/{pass}/{name}:
+    post:
+      tags:
+        - OPA
+      parameters:
+        - name: pass
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+  /api/OPA/UpdateOPA:
+    post:
+      tags:
+        - OPA
+      responses:
+        '200':
+          description: Success
+  /api/OPA/BundleGetv2/{ServiceName}/{Resource}:
+    get:
+      tags:
+        - OPA
+      parameters:
+        - name: ServiceName
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: Resource
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+  /api/OPA/BundleGet/{ServiceName}/{Resource}:
+    get:
+      tags:
+        - OPA
+      parameters:
+        - name: ServiceName
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: Resource
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+  /api/OPA/CheckUserAccess:
+    get:
+      tags:
+        - OPA
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: boolean
+            application/json:
+              schema:
+                type: boolean
+            text/json:
+              schema:
+                type: boolean
+  /api/Submission/IsUserApprovedOnProject:
+    get:
+      tags:
+        - Submission
+      parameters:
+        - name: projectId
+          in: query
+          schema:
+            type: integer
+            format: int32
+        - name: userId
+          in: query
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/BoolReturn'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BoolReturn'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/BoolReturn'
+  /api/Submission/GetWaitingSubmissionsForTre:
+    get:
+      tags:
+        - Submission
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Submission'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Submission'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Submission'
+  /api/Submission/UpdateStatusForTre:
+    post:
+      tags:
+        - Submission
+      parameters:
+        - name: subId
+          in: query
+          schema:
+            type: string
+        - name: statusType
+          in: query
+          schema:
+            $ref: '#/components/schemas/StatusType'
+        - name: description
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/APIReturn'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIReturn'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/APIReturn'
+  /api/Submission/GetOutputBucketInfo:
+    get:
+      tags:
+        - Submission
+      parameters:
+        - name: subId
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OutputBucketInfo'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OutputBucketInfo'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OutputBucketInfo'
+  /api/Submission/FilesReadyForReview:
+    post:
+      tags:
+        - Submission
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/ReviewFiles'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReviewFiles'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ReviewFiles'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ReviewFiles'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/BoolReturn'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BoolReturn'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/BoolReturn'
+  /api/Submission/EgressResults:
+    post:
+      tags:
+        - Submission
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/EgressReview'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EgressReview'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/EgressReview'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/EgressReview'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/BoolReturn'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BoolReturn'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/BoolReturn'
+  /api/Submission/FinalOutcome:
+    post:
+      tags:
+        - Submission
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/FinalOutcome'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FinalOutcome'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/FinalOutcome'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/FinalOutcome'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/BoolReturn'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BoolReturn'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/BoolReturn'
+  /api/Submission/SendSubmissionToHUTCH:
+    post:
+      tags:
+        - Submission
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/Submission'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Submission'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/Submission'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/Submission'
+      responses:
+        '200':
+          description: Success
+  /api/Submission/SimulateSubmissionProcessing:
+    post:
+      tags:
+        - Submission
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/Submission'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Submission'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/Submission'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/Submission'
+      responses:
+        '200':
+          description: Success
+  /api/SubmissionCredentials/CheckCredentialsAreValid:
+    get:
+      tags:
+        - SubmissionCredentials
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/BoolReturn'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BoolReturn'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/BoolReturn'
+  /api/SubmissionCredentials/UpdateCredentials:
+    post:
+      tags:
+        - SubmissionCredentials
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/KeycloakCredentials'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KeycloakCredentials'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/KeycloakCredentials'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/KeycloakCredentials'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/KeycloakCredentials'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KeycloakCredentials'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/KeycloakCredentials'
+  /api/TRECredentials/CheckCredentialsAreValid:
+    get:
+      tags:
+        - TRECredentials
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/BoolReturn'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BoolReturn'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/BoolReturn'
+  /api/TRECredentials/UpdateCredentials:
+    post:
+      tags:
+        - TRECredentials
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/KeycloakCredentials'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KeycloakCredentials'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/KeycloakCredentials'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/KeycloakCredentials'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/KeycloakCredentials'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KeycloakCredentials'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/KeycloakCredentials'
 components:
   schemas:
-    Project:
+    APIReturn:
       type: object
+      properties:
+        boolReturn:
+          type: boolean
+        returnType:
+          $ref: '#/components/schemas/ReturnType'
+      additionalProperties: false
+    AuditLog:
+      type: object
+      properties:
+        error:
+          type: boolean
+        errorMessage:
+          type: string
+          nullable: true
+        id:
+          type: integer
+          format: int32
+        project:
+          $ref: '#/components/schemas/Project'
+        user:
+          $ref: '#/components/schemas/User'
+        tre:
+          $ref: '#/components/schemas/Tre'
+        submission:
+          $ref: '#/components/schemas/Submission'
+        loggedInUserName:
+          type: string
+          nullable: true
+        historicFormData:
+          type: string
+          nullable: true
+        iPaddress:
+          type: string
+          nullable: true
+        logType:
+          $ref: '#/components/schemas/LogType'
+        date:
+          type: string
+          format: date-time
+      additionalProperties: false
+    BoolReturn:
+      type: object
+      properties:
+        result:
+          type: boolean
+      additionalProperties: false
+    CredentialType:
+      enum:
+        - 0
+        - 1
+        - 2
+      type: integer
+      format: int32
+    Decision:
+      enum:
+        - 0
+        - 1
+        - 2
+      type: integer
+      format: int32
+    EgressResult:
+      type: object
+      properties:
+        fileName:
+          type: string
+          nullable: true
+        approved:
+          type: boolean
+      additionalProperties: false
+    EgressReview:
+      type: object
+      properties:
+        subId:
+          type: string
+          nullable: true
+        fileResults:
+          type: array
+          items:
+            $ref: '#/components/schemas/EgressResult'
+          nullable: true
+        outputBucket:
+          type: string
+          nullable: true
+      additionalProperties: false
+    FileStatus:
+      enum:
+        - 0
+        - 1
+        - 2
+      type: integer
+      format: int32
+    FinalOutcome:
+      type: object
+      properties:
+        subId:
+          type: string
+          nullable: true
+        file:
+          type: string
+          nullable: true
+      additionalProperties: false
+    HistoricStatus:
+      type: object
+      properties:
+        error:
+          type: boolean
+        errorMessage:
+          type: string
+          nullable: true
+        id:
+          type: integer
+          format: int32
+        start:
+          type: string
+          format: date-time
+        end:
+          type: string
+          format: date-time
+        submission:
+          $ref: '#/components/schemas/Submission'
+        status:
+          $ref: '#/components/schemas/StatusType'
+        statusDescription:
+          type: string
+          nullable: true
+        isCurrent:
+          type: boolean
+        isStillRunning:
+          type: boolean
+      additionalProperties: false
+    KeycloakCredentials:
       required:
-        - id
-        - name
-        - status
-        - createdAt
+        - passwordEnc
+        - userName
+      type: object
+      properties:
+        error:
+          type: boolean
+        errorMessage:
+          type: string
+          nullable: true
+        id:
+          type: integer
+          format: int32
+        userName:
+          minLength: 1
+          type: string
+        passwordEnc:
+          minLength: 1
+          type: string
+        confirmPassword:
+          type: string
+          nullable: true
+        credentialType:
+          $ref: '#/components/schemas/CredentialType'
+        valid:
+          type: boolean
+      additionalProperties: false
+    LogType:
+      enum:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+        - 9
+        - 10
+      type: integer
+      format: int32
+    MembershipTreDecision:
+      type: object
       properties:
         id:
+          type: integer
+          format: int32
+        submissionProj:
+          $ref: '#/components/schemas/Project'
+        user:
+          $ref: '#/components/schemas/User'
+        tre:
+          $ref: '#/components/schemas/Tre'
+        decision:
+          $ref: '#/components/schemas/Decision'
+      additionalProperties: false
+    OutputBucketInfo:
+      type: object
+      properties:
+        host:
           type: string
-          format: uuid
-          description: Unique identifier for the project
+          nullable: true
+        subId:
+          type: string
+          nullable: true
+        bucket:
+          type: string
+          nullable: true
+        path:
+          type: string
+          nullable: true
+        secure:
+          type: boolean
+      additionalProperties: false
+    Project:
+      type: object
+      properties:
+        error:
+          type: boolean
+        errorMessage:
+          type: string
+          nullable: true
+        id:
+          type: integer
+          format: int32
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+          nullable: true
+        tres:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tre'
+          nullable: true
+        formData:
+          type: string
+          nullable: true
         name:
           type: string
-          description: Name of the project
-          maxLength: 255
-        description:
+          nullable: true
+        display:
           type: string
-          description: Description of the project
-          maxLength: 1000
-        status:
-          type: string
-          enum: [active, inactive, archived]
-          description: Current status of the project
-        createdAt:
+          nullable: true
+        startDate:
           type: string
           format: date-time
-          description: When the project was created
-        updatedAt:
+        endDate:
           type: string
           format: date-time
-          description: When the project was last updated
-        ownerId:
+        projectDescription:
           type: string
-          format: uuid
-          description: ID of the project owner
-        tags:
+          nullable: true
+        projectOwner:
+          type: string
+          nullable: true
+        projectContact:
+          type: string
+          nullable: true
+        markAsEmbargoed:
+          type: boolean
+        submissionBucket:
+          type: string
+          nullable: true
+        outputBucket:
+          type: string
+          nullable: true
+        submissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Submission'
+          nullable: true
+        auditLogs:
+          type: array
+          items:
+            $ref: '#/components/schemas/AuditLog'
+          nullable: true
+        projectTreDecisions:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProjectTreDecision'
+          nullable: true
+        membershipTreDecision:
+          type: array
+          items:
+            $ref: '#/components/schemas/MembershipTreDecision'
+          nullable: true
+      additionalProperties: false
+    ProjectTreDecision:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        submissionProj:
+          $ref: '#/components/schemas/Project'
+        tre:
+          $ref: '#/components/schemas/Tre'
+        decision:
+          $ref: '#/components/schemas/Decision'
+      additionalProperties: false
+    ReturnType:
+      enum:
+        - 0
+        - 1
+      type: integer
+      format: int32
+    ReviewFiles:
+      type: object
+      properties:
+        subId:
+          type: string
+          nullable: true
+        files:
           type: array
           items:
             type: string
-          description: Tags associated with the project
-        metadata:
-          type: object
-          additionalProperties: true
-          description: Additional metadata for the project
-
-
-
-    ErrorResponse:
+          nullable: true
+        tesId:
+          type: string
+          nullable: true
+        name:
+          type: string
+          nullable: true
+      additionalProperties: false
+    StageInfo:
       type: object
-      required:
-        - error
-        - message
+      properties:
+        statusTypeList:
+          type: array
+          items:
+            $ref: '#/components/schemas/StatusType'
+          nullable: true
+        stageName:
+          type: string
+          nullable: true
+        stageNumber:
+          type: integer
+          format: int32
+        stagesDict:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              $ref: '#/components/schemas/StatusType'
+          nullable: true
+      additionalProperties: false
+    StatusType:
+      enum:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+        - 9
+        - 10
+        - 11
+        - 12
+        - 13
+        - 14
+        - 15
+        - 16
+        - 17
+        - 18
+        - 19
+        - 20
+        - 21
+        - 22
+        - 23
+        - 24
+        - 25
+        - 26
+        - 27
+        - 28
+        - 29
+        - 30
+        - 31
+        - 32
+        - 33
+        - 34
+        - 35
+        - 36
+        - 37
+        - 38
+        - 39
+        - 40
+        - 41
+        - 42
+        - 43
+        - 44
+        - 45
+        - 46
+        - 47
+        - 48
+        - 49
+      type: integer
+      format: int32
+    Submission:
+      type: object
       properties:
         error:
+          type: boolean
+        errorMessage:
           type: string
-          description: Error code
-        message:
+          nullable: true
+        id:
+          type: integer
+          format: int32
+        parentId:
+          type: integer
+          format: int32
+          nullable: true
+        tesId:
           type: string
-          description: Human-readable error message
-        details:
-          type: object
-          additionalProperties: true
-          description: Additional error details
-
-tags:
-  - name: analysis
-    description: Operations related to analysis
-  - name: projects
-    description: Operations related to project management
+          nullable: true
+        sourceCrate:
+          type: string
+          nullable: true
+        tesName:
+          type: string
+          nullable: true
+        tesJson:
+          type: string
+          nullable: true
+        finalOutputFile:
+          type: string
+          nullable: true
+        dockerInputLocation:
+          type: string
+          nullable: true
+        project:
+          $ref: '#/components/schemas/Project'
+        parent:
+          $ref: '#/components/schemas/Submission'
+        children:
+          type: array
+          items:
+            $ref: '#/components/schemas/Submission'
+          nullable: true
+        historicStatuses:
+          type: array
+          items:
+            $ref: '#/components/schemas/HistoricStatus'
+          nullable: true
+        stageInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/StageInfo'
+          nullable: true
+        submissionFiles:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubmissionFile'
+          nullable: true
+        auditLogs:
+          type: array
+          items:
+            $ref: '#/components/schemas/AuditLog'
+          nullable: true
+        tre:
+          $ref: '#/components/schemas/Tre'
+        submittedBy:
+          $ref: '#/components/schemas/User'
+        lastStatusUpdate:
+          type: string
+          format: date-time
+        startTime:
+          type: string
+          format: date-time
+        endTime:
+          type: string
+          format: date-time
+        status:
+          $ref: '#/components/schemas/StatusType'
+        statusDescription:
+          type: string
+          nullable: true
+        queryToken:
+          type: string
+          nullable: true
+      additionalProperties: false
+    SubmissionFile:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+          nullable: true
+        treBucketFullPath:
+          type: string
+          nullable: true
+        submisionBucketFullPath:
+          type: string
+          nullable: true
+        status:
+          $ref: '#/components/schemas/FileStatus'
+        description:
+          type: string
+          nullable: true
+        submission:
+          $ref: '#/components/schemas/Submission'
+      additionalProperties: false
+    Tre:
+      type: object
+      properties:
+        error:
+          type: boolean
+        errorMessage:
+          type: string
+          nullable: true
+        id:
+          type: integer
+          format: int32
+        projects:
+          type: array
+          items:
+            $ref: '#/components/schemas/Project'
+          nullable: true
+        name:
+          type: string
+          nullable: true
+        lastHeartBeatReceived:
+          type: string
+          format: date-time
+        adminUsername:
+          type: string
+          nullable: true
+        about:
+          type: string
+          nullable: true
+        formData:
+          type: string
+          nullable: true
+        submissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Submission'
+          nullable: true
+        projectTreDecisions:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProjectTreDecision'
+          nullable: true
+        membershipTreDecision:
+          type: array
+          items:
+            $ref: '#/components/schemas/MembershipTreDecision'
+          nullable: true
+        auditLogs:
+          type: array
+          items:
+            $ref: '#/components/schemas/AuditLog'
+          nullable: true
+      additionalProperties: false
+    TreAuditLog:
+      type: object
+      properties:
+        error:
+          type: boolean
+        errorMessage:
+          type: string
+          nullable: true
+        id:
+          type: integer
+          format: int32
+        approved:
+          type: boolean
+        approvedBy:
+          type: string
+          nullable: true
+        iPaddress:
+          type: string
+          nullable: true
+        date:
+          type: string
+          format: date-time
+        project:
+          $ref: '#/components/schemas/TreProject'
+        membershipDecision:
+          $ref: '#/components/schemas/TreMembershipDecision'
+      additionalProperties: false
+    TreMembershipDecision:
+      type: object
+      properties:
+        error:
+          type: boolean
+        errorMessage:
+          type: string
+          nullable: true
+        id:
+          type: integer
+          format: int32
+        user:
+          $ref: '#/components/schemas/TreUser'
+        project:
+          $ref: '#/components/schemas/TreProject'
+        archived:
+          type: boolean
+        decision:
+          $ref: '#/components/schemas/Decision'
+        projectExpiryDate:
+          type: string
+          format: date-time
+        approvedBy:
+          type: string
+          nullable: true
+        lastDecisionDate:
+          type: string
+          format: date-time
+        auditLogs:
+          type: array
+          items:
+            $ref: '#/components/schemas/TreAuditLog'
+          nullable: true
+      additionalProperties: false
+    TreProject:
+      type: object
+      properties:
+        error:
+          type: boolean
+        errorMessage:
+          type: string
+          nullable: true
+        id:
+          type: integer
+          format: int32
+        submissionProjectId:
+          type: integer
+          format: int32
+        userName:
+          type: string
+          nullable: true
+        password:
+          type: string
+          nullable: true
+        submissionProjectName:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        memberDecisions:
+          type: array
+          items:
+            $ref: '#/components/schemas/TreMembershipDecision'
+          nullable: true
+        localProjectName:
+          type: string
+          nullable: true
+        decision:
+          $ref: '#/components/schemas/Decision'
+        archived:
+          type: boolean
+        approvedBy:
+          type: string
+          nullable: true
+        lastDecisionDate:
+          type: string
+          format: date-time
+        projectExpiryDate:
+          type: string
+          format: date-time
+        submissionBucketTre:
+          type: string
+          nullable: true
+        outputBucketTre:
+          type: string
+          nullable: true
+        auditLogs:
+          type: array
+          items:
+            $ref: '#/components/schemas/TreAuditLog'
+          nullable: true
+        outputBucketSub:
+          type: string
+          nullable: true
+      additionalProperties: false
+    TreUser:
+      type: object
+      properties:
+        error:
+          type: boolean
+        errorMessage:
+          type: string
+          nullable: true
+        id:
+          type: integer
+          format: int32
+        submissionUserId:
+          type: integer
+          format: int32
+        memberDecisions:
+          type: array
+          items:
+            $ref: '#/components/schemas/TreMembershipDecision'
+          nullable: true
+        archived:
+          type: boolean
+        username:
+          type: string
+          nullable: true
+        email:
+          type: string
+          nullable: true
+      additionalProperties: false
+    User:
+      type: object
+      properties:
+        error:
+          type: boolean
+        errorMessage:
+          type: string
+          nullable: true
+        id:
+          type: integer
+          format: int32
+        fullName:
+          type: string
+          nullable: true
+        name:
+          type: string
+          nullable: true
+        email:
+          type: string
+          nullable: true
+        projects:
+          type: array
+          items:
+            $ref: '#/components/schemas/Project'
+          nullable: true
+        submissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Submission'
+          nullable: true
+        formData:
+          type: string
+          nullable: true
+        biography:
+          type: string
+          nullable: true
+        organisation:
+          type: string
+          nullable: true
+        membershipTreDecision:
+          type: array
+          items:
+            $ref: '#/components/schemas/MembershipTreDecision'
+          nullable: true
+        auditLogs:
+          type: array
+          items:
+            $ref: '#/components/schemas/AuditLog'
+          nullable: true
+      additionalProperties: false
+  securitySchemes:
+    Bearer:
+      type: http
+      description: Enter JWT token.
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - Bearer: []
