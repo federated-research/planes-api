@@ -1,6 +1,12 @@
 # Planes API Documentation
 
-Documentation for Plane APIs.
+This repository contains the early-stage schema for the Planes API.
+
+The aim of this API is to define a consistent way for systems to describe and interact with Trellis **Planes**.
+
+Read more about [Trellis](https://docs.federated-analytics.ac.uk/trellis).
+
+See the human-readable [reference documentation](https://trellis.federated-analytics.ac.uk).
 
 ## Developer
 
